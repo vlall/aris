@@ -9,7 +9,7 @@ class Ip_Check:
 			
 			public_IP = commands.getstatusoutput('curl -s checkip.dyndns.org | sed -e \'s/.*Current IP Address: //\' -e \'s/<.*$//\'') 
 			local_IP = commands.getstatusoutput('ifconfig | grep -Eo \'inet (addr:)?([0-9]*\.){3}[0-9]*\' | grep -Eo \'([0-9]*\.){3}[0-9]*\' | grep -v \'127.0.0.1\'')
-			self.public_IP = public_IP[1]
+			self.public_IP = str(public_IP[1])
 			self.local_IP=str(local_IP[1])
 
 	def EOS_login(self, hostname='arista', hostpass='arista'):
@@ -44,7 +44,7 @@ def main():
 	netStat = netStat[1].split('\n')[0:i]
 	for tcp in netStat:
 		print tcp
-	print ('Public IP: ')+ x.public_IP
-	print ('Local IP: ')+ x.local_IP
+	print ('Public IP: ') + x.public_IP
+	print ('Local IP: ') + x.local_IP
 
 main()
